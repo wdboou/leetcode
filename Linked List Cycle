@@ -11,17 +11,14 @@ public:
     bool hasCycle(ListNode *head) {
         // IMPORTANT: Please reset any member data you declared, as
         // the same Solution instance will be reused for each test case.
-        ListNode *faster = head;
-        ListNode *slower = head;
-        while(faster!=NULL && faster->next!=NULL && faster->next->next!=NULL)
+        ListNode *fast = head;
+        ListNode *slow = head;
+        while(fast!=NULL && fast!=NULL)
         {
-            if(faster->next == slower || faster->next->next == slower)
-            return true;
-            else 
-            {
-                faster = faster->next->next;
-                slower = slower->next;
-            }
+        	slow = slow->next;
+        	fast = fast->next->next;
+        	if(slow == fast)
+        	return ture;
         }
         return false;
     }
