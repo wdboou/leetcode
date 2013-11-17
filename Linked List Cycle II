@@ -21,7 +21,7 @@ public:
         	return NULL;
         	slow = slow->next;
         	fast = fast->next->next;
-        	if(fast=slow)
+        	if(fast==slow)
         	break;
         }
         slow = head;
