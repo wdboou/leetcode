@@ -32,8 +32,8 @@ public:
         // find the cut point
         temp = end;
         head = start;
-        int step = k%_len;
-        for(int i=0; i<_len-step; i++)
+        int step = _len -( k%_len);
+        for(int i=0; i<step; i++)
         {
             temp = head;
             head = head->next;
