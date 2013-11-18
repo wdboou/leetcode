@@ -1,0 +1,37 @@
+ListNode *start = NULL;
+        ListNode *temp = NULL;
+        bool bool_start = false;
+        if (head==NULL) return NULL;
+        int cur = head->val;
+        int count = 1;
+        while(true)
+        {
+            if(head->next->val == cur)
+            {
+                count++;
+                temp = head->next;
+                head->next = NULL;
+                head = temp;
+                continue;
+            }else if(head->next->val != cur && count==1)
+            {
+                if(!bool_start) 
+                {
+                    start = head;
+                    bool_start = true;
+                }
+                head = head->next;
+                cur = head->val;
+                count = 1;
+                continue;
+            }else if(head->next->val != cur && count>1)
+            {
+                temp = head->next;
+                head->next = NULL;
+                head = temp;
+                cur = head->val;
+                count = 1;
+                continue;
+            }
+        }
+        return start;
