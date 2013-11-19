@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int singleNumber(int A[], int n) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        int ones = 0; // record if 1 shows (%3 =) 2 times
+        int twos = 0; // record if 1 shows (%3 =) 1 times
+        int threes = 0; // record if 1 shows (%3 =) 0 times
+        while(--n >= 0)
+        {
+            twos |= (ones & A[n]); // deleter those shows once from tows
+            ones ^= A[n]; // delete those shows twice from ones
+            threes = ~(ones & twos); // set those show third times to 0
+            ones &= threes; // delete those shows three times from ones
+            twos &= threes; // delete those shows three times from twos
+        }
+        return ones|twos;
+    }
+};
