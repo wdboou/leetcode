@@ -1,0 +1,23 @@
+// using queue
+// level order traversal
+
+level_tra(TreeNode * root)
+{
+    queue <TreeNode *> q_tree;
+    q_tree.push(root);
+    while(!q_tree.empty)
+    {
+        TreeNode* temp = q_tree.pop();
+        output(temp->val);
+        if(temp->left != NULL)
+        {
+            q_tree.push(temp->left);
+            if(temp->right != NULL)
+                q_tree.push(temp->right);
+        }else
+        {
+            if(temp->right != NULL)
+                q_tree.push(temp->right);
+        }
+    }
+}
