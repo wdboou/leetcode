@@ -1,0 +1,42 @@
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<vector<int> > levelOrderBottom(TreeNode *root) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        vector<vector<int>> rslt;
+        if(root==NULL) return rslt;
+        int level=1;
+        tree_recur(root, rslt, level);
+        stack<vector<int>> st;
+        for(int i=0; i<rslt.size(); i++)
+        st.push(rslt[i]);
+        rslt.clear();
+        while(!st.empty())
+        {
+            rslt.push_back(st.top());
+            st.pop();
+        }
+        return rslt;
+    }
+    void tree_recur(TreeNode *_rt, vector<vector<int>> &vec, int _level)
+    {
+        if(_rt==NULL) return;
+        if(_level>vec.size())
+        {
+            vector<int> temp;
+            vec.push_back(temp);
+        }
+        tree_recur(_rt->left, vec, _level+1);
+        tree_recur(_rt->right, vec, _level+1);
+        vec[_level-1].push_back(_rt->val);
+    }
+};
