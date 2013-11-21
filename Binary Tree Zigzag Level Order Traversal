@@ -1,0 +1,50 @@
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<vector<int> > zigzagLevelOrder(TreeNode *root) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        
+        // very similar to level order traversal we can use stack instead of queue here
+        // another thing I need to remember is the order
+        // we need to choose the order we put node into the stack
+        
+        vector<vector<int>> rslt;
+        vector<int> temp;
+        if(root==NULL) return rslt;
+        stack<TreeNode*> cur, next;
+        bool L2R = true;
+        cur.push(root);
+        while(!cur.empty())
+        {
+            TreeNode* tmp_nd = cur.top();
+            temp.push_back(tmp_nd->val);
+            cur.pop();
+            if(L2R)
+            {
+                if(tmp_nd->left!=NULL) next.push(tmp_nd->left);
+                if(tmp_nd->right!=NULL) next.push(tmp_nd->right);
+            }else
+            {
+                if(tmp_nd->right!=NULL) next.push(tmp_nd->right);
+                if(tmp_nd->left!=NULL) next.push(tmp_nd->left);
+            }
+            if(cur.empty())
+            {
+                rslt.push_back(temp);
+                swap(cur, next);
+                temp.clear();
+                L2R = !L2R;
+            }
+        }
+        return rslt;
+    }
+};
