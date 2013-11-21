@@ -1,0 +1,39 @@
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isSameTree(TreeNode *p, TreeNode *q) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        vector<bool> node1;
+        vector<bool> node2;
+        vector<int> val1;
+        vector<int> val2;
+        recur(p, &node1, &val1);
+        recur(q, &node2, &val2);
+        for(int i=0; i<node1.size(); i++)
+        {
+            if(node1[i]!= node2[i] || val1[i] != val2[i]) return false;
+        }
+        return true;
+    }
+    void recur(TreeNode* _rt, vector<bool> *node, vector<int> *val)
+    {
+        if(_rt==NULL) {node->push_back(false); val->push_back(0);}
+        else
+        {
+            node->push_back(true);
+            val->push_back(_rt->val);
+            recur( _rt->left, node, val);
+            recur( _rt->right, node, val);
+        }
+    }
+};
+
