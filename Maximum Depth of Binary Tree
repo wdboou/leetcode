@@ -12,21 +12,9 @@ public:
     int maxDepth(TreeNode *root) {
         // IMPORTANT: Please reset any member data you declared, as
         // the same Solution instance will be reused for each test case.
-        int depth = 0;
-        if (root == NULL) return depth;
-        recur(root, 1, &depth);
-        return depth;
-    }
-    void recur(TreeNode* _rt, int dep_cur, int* dep_max)
-    {
-        if (dep_cur>*dep_max) *dep_max=dep_cur;
-        if(_rt->left!=NULL)
-        {
-            recur(_rt->left, dep_cur+1, dep_max);
-            if(_rt->right!=NULL) recur(_rt->right, dep_cur+1, dep_max);
-        }else
-        {
-            if(_rt->right!=NULL) recur(_rt->right, dep_cur+1, dep_max);
-        }
+        int if(!root) return 0;
+        int left_dep = maxDepth(root->left);
+        int right_dep = maxDepth(root->right);
+        return (left_dep>right_dep)?(left_dep+1):(right_dep)+1;
     }
 };
