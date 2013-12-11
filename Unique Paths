@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        if(m==1||n==1) return 1;
+        long int deo = 1, nu = 1;
+        int sum = m+n-2;
+        int large, small;
+        if (m>n) {large = m; small = n-1;}
+        else {small = m-1; large = n;}
+        for(int i=large; i<=sum; i++)
+        {
+            deo*=i;
+        }
+        for(int i = 1; i<=small; i++)
+        {
+            nu*=i;
+        }
+        return deo/nu;
+    }
+};
