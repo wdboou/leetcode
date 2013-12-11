@@ -1,0 +1,47 @@
+class Solution {
+public:
+    void merge(int A[], int m, int B[], int n) {
+        if(n==0) return;
+        else if(m==0)
+        {
+            for(int k=0; k<n; k++) A[k] = B[k];
+            return;
+        }
+        int i=0;  // should less than m+n
+        int j=0;  // should less than n
+        while(i<m)
+        {
+            if(A[i]<=B[j]) i++;
+            else 
+            {
+                swap(A[i], B[j]);
+                i++;
+                keep_b_sorted(B,n);
+            }
+        }
+        for(i=0; i<n; i++)
+        {
+            A[m+i] = B[i];
+        }
+        return;
+    }
+    void swap(int &x, int &y)
+    {
+        int temp = x;
+        x = y;
+        y = temp;
+    }
+    void keep_b_sorted(int* b, int n)
+    {
+        int i=0;
+        while(i<n-1)
+        {
+            if(b[i]>b[i+1])
+            {
+                swap(b[i], b[i+1]);
+                i++;
+            }
+            else break;
+        }
+    }
+};
