@@ -1,0 +1,38 @@
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool hasPathSum(TreeNode *root, int sum) {
+        int cur_sum = 0;
+        if(!root) return false;
+        return recur_tree(root, 0, sum);
+    }
+    bool recur_tree(TreeNode* _rt, int cur_sum, int sum)
+    {
+        cur_sum+=_rt->val;
+        if(_rt->right)
+        {
+            if(_rt->left)
+            {
+                return recur_tree(_rt->right, cur_sum, sum)||recur_tree(_rt->left, cur_sum, sum);
+            }else
+                return recur_tree(_rt->right, cur_sum, sum);
+        } else
+        {
+            if(_rt->left)
+            {
+                return recur_tree(_rt->left, cur_sum, sum);
+            }else
+            {
+                return (cur_sum==sum)?true:false;
+            }
+        }
+    }
+};
