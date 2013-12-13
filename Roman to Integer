@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int romanToInt(string s) {
+        int len = s.size();
+        vector<int> iter;
+        for(int i=0; i<len; i++)
+            iter.push_back(getNum(s[i]));
+        int i=1;
+        while(i<iter.size())
+        {
+            if(iter[i-1]<iter[i])
+            {
+                iter[i] = iter[i]-iter[i-1];
+                iter.erase(iter.begin()+i-1);
+            }else
+            i++;
+        }
+        int result = 0;
+        for(i=0; i<iter.size(); i++)
+        result+=iter[i];
+        return result;
+    }
+    int getNum(char a)
+    {
+            if(a=='M') return 1000;
+            if(a=='D') return 500;
+            if(a=='C') return 100;
+            if(a=='L') return 50;
+            if(a=='X') return 10;
+            if(a=='V') return 5;
+            if(a=='I') return 1;
+    }
+};
