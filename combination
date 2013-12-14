@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<vector<int> > combine(int n, int k) {
+        vector<vector<int>> res;
+        vector<int> cur;
+        comb_recur(n, k, 1, cur, res);
+        return res;
+    }
+    void comb_recur(int n, int k, int idx, vector<int> cur, vector<vector<int>> _res)
+    {
+        if(cur.size()==k) { _res.push_back(cur); return;}
+        for(int i=idx; i<=n; i++)
+        {
+            cur.push_back(i);
+            comb_recur(n,k,idx+1, cur, _res);
+            cur.pop_back();
+        }
+    }
+};
