@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        string s;
+        vector<string> result;
+        gen_par(n,n,s,result);
+        return result;
+    }
+    void gen_par(int l, int r, string s, vector<string> &res)
+    {
+        if(l==0&&r==0)
+        {
+            res.push_back(s);
+            return;
+        }
+        if(l>0) gen_par(l-1, r, s+"(", res);
+        if(r>l) gen_par(l, r-1, s+")", res);
+    }
+};
