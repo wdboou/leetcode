@@ -1,0 +1,18 @@
+class Solution {
+public:
+    void sortColors(int A[], int n) {
+        // this is the two pass solution
+        int r_0=0;
+        int r_1=0;
+        int r_2=0;
+        for(int i=0;i<n;i++)
+        {
+            if(A[i]==0) r_0++;
+            else if (A[i]==1) r_1++;
+            else if(A[i]==2) r_2++;
+        }
+        for(int i=0; i<r_0; i++) A[i]=0;
+        for(int i=r_0; i<r_0+r_1; i++) A[i]=1;
+        for(int i=r_0+r_1; i<r_0+r_1+r_2; i++) A[i]=2;
+    }
+};
