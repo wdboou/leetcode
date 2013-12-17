@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<vector<int> > subsets(vector<int> &S) {
+        int n = S.size();
+        vector<vector<int>> result;
+        vector<int> nul_vec;
+        sort(S.begin(),S.end());
+        nul_vec.clear();
+        result.push_back(nul_vec);
+        int i=1;
+        while(i<=n)
+        {
+            int temp = result.size();
+            for(int j=0; j<temp; j++)
+            {
+                result[j].push_back(S[i-1]);
+                vector<int> tt = result[j];
+                result[j].pop_back();
+                result.push_back(tt);
+            }
+            i++;
+        }
+        return result;
+    }
+};
