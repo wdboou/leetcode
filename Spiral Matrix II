@@ -1,0 +1,40 @@
+class Solution {
+public:
+    vector<vector<int> > generateMatrix(int n) {
+        vector<vector<int>> res(n, vector<int>(n));
+        int row_st = 0;
+        int row_end = n-1;
+        int col_st = 0;
+        int col_end = n-1;
+        int idx = 0;
+        // I have read the code so we do this circle by circle
+        // decide the boundary condition
+        while(idx<(n*n))
+        {
+            if(col_st<=col_end&&row_st<=row_end)
+            {
+                for(int j=col_st; j<=col_end; j++) res[row_st][j] = ++idx;
+                row_st++;
+            } else break;
+            
+            if(col_st<=col_end&&row_st<=row_end)
+            {
+                for(int i=row_st; i<=row_end; i++) res[i][col_end] = ++idx;
+                col_end--;
+            } else break;
+            
+            if(col_st<=col_end&&row_st<=row_end)
+            {
+                for(int j=col_end; j>=col_st; j--) res[row_end][j] = ++idx;
+                row_end--;
+            } else break;
+            
+            if(col_st<=col_end&&row_st<=row_end)
+            {
+                for(int i=row_end; i>=row_st; i--) res[i][col_st] = ++idx;
+                col_st++;
+            } else break;
+        }
+        return res;
+    }
+};
