@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int jump(int A[], int n) {
+        int max, cur, step=0;
+        for(int i=0, max = A[0], cur = 0; i<n; i++)
+        {
+            if(i>cur)
+            {
+                if(max<i) return -1;
+                cur = max;
+                step++;
+            }
+            max = (max>A[i]+i)?max:A[i]+i;
+        }
+        return step;
+    }
+};
