@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<int> searchRange(int A[], int n, int target) {
+        vector<int> pos(2,-1);
+        int lower = 0, upper = n-1;
+        while(lower<upper)
+        {
+            int mid = lower + (upper-lower)/2;
+            if(A[mid]<target)
+                lower = mid+1;
+            else upper = mid;
+        }
+        if(A[lower]==target) pos[0]=lower;
+        else return pos;
+        lower = 0;
+        upper = n-1;
+        while(lower<upper)
+        {
+            int mid = lower + (upper-lower)/2+1;
+            if(A[mid]>target)
+                upper = mid-1;
+            else lower = mid;
+        }
+        pos[1] = lower;
+        return pos;
+    }
+};
