@@ -1,0 +1,42 @@
+class Solution {
+public:
+    vector<int> searchRange(int A[], int n, int target) {
+        vector<int> pos(2,-1);
+        if(n==0) return pos;
+        find_start(A,0,n-1,target, pos);
+        if(pos[0]!=-1)
+            find_end(A,0,n-1,target, pos);
+        return pos;
+    }
+    void find_start(int* a, int start, int end, int target, vector<int> &pos)
+    {
+        if(start>end)
+        return;
+        else if(start == end)
+        {
+            if(a[start] == target) pos[0] = start;
+            return;
+        }
+        int mid = start+(end-start)/2;
+        if(a[mid]<target)
+            find_start(a, mid+1, end, target, pos);
+        else if(a[mid]>target)
+            find_start(a,start,mid-1,target,pos);
+        else find_start(a,start,mid, target, pos);
+    }
+    void find_end(int *a, int start, int end, int target, vector<int> &pos)
+    {
+        if(start>end) return;
+        else if(start==end)
+        {
+            if(a[start]==target) pos[1] = start;
+            return;
+        }
+        int mid = start + (end-start)/2 + 1;
+        if(a[mid]<target)
+            find_end(a, mid+1, end, target ,pos);
+        else if(a[mid]>target)
+            find_end(a, start, mid-1, target,  pos);
+        else find_end(a, mid,end,target,pos);
+    }
+};
