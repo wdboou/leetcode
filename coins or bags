@@ -1,0 +1,55 @@
+/*
+coins or bags
+There are coins valued 1,2,5,20,50,100, given a sum of money sum, how many ways are there by using these coins to sum up to the given
+money.
+The classic integer bag problem is similar to this problem.
+*/
+
+#include<iostream>
+using namespace std;
+
+static const int types = 6;
+const int coin[types] = {1,2,5,20,50,100};
+int waysRecur(int total_types, int sum)
+{
+  if(total_types<=0) return 1;
+  int ways = 0;
+  int maxCoin = coin[total_types];
+  for(int i=0; i<=sum/maxCoin; i++)
+  {
+    ways+=wayRecur(total_types-1, sum-i*maxCoin);
+  }
+  return ways;
+}
+
+int waysDP(int sum)
+{
+  if(sum<=0) return 1;
+  int * ways[types];
+  for(int i=0; i<types; i++)
+  {
+    ways[i] = new int[sum+1];
+  }
+  for(int i=0; i<=sum; i++)
+    ways[0][i] = 1;
+  
+  for(int it = 1; it<types; it++)
+  {
+    for(int is=0; is<=sum; is++)
+    {
+      ways[it][is] = 0;
+      for(int i=0; i*coin[it]<=is; i++)
+      {
+        int remain = is - i*coin[it];
+        ways[it][is]+= ways[it-1][remain];
+      }
+    }
+  }
+  
+  int rslt = ways[types-1][sum];
+  for(int i=0; i<types; i++)
+    delete ways[i];
+  return rslt;
+}
+
+
