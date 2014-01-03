@@ -1,0 +1,31 @@
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int l = 0;
+        int r = s.size()-1;
+        while(l<r)
+        {
+            int left,right;
+            if(s[l]-'a'<26&&s[l]-'a'>=0) left=s[l]-'a';
+            else if(s[l]-'A'<26&&s[l]-'A'>=0) left=s[l]-'A';
+            else if(s[l]-'0'<10&&s[l]-'0'>=0) left=s[l]-'0'+26;
+            else {l++;continue;}
+            if(s[r]-'a'<26&&s[r]-'a'>=0) right=s[r]-'a';
+            else if(s[r]-'A'<26&&s[r]-'A'>=0) right=s[r]-'A';
+            else if(s[r]-'0'<10&&s[r]-'0'>=0) right=s[r]-'0'+26;
+            else {r--;continue;}
+            
+                if(left == right)
+                {
+                    l++;
+                    r--;
+                }
+                else
+                {
+                    return false;
+                }
+            
+        }
+        return true;
+    }
+};
