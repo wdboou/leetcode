@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<string> letterCombinations(string digits) {
+        string dic[8] = {"abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        vector<string> res;
+        string cur;
+        recur(0, digits.size(), dic, digits, res, cur);
+        return res;
+    }
+    void recur(int start, int len, string* map,  string digit, vector<string> &res, string temp)
+    {
+        if(start>=len) {res.push_back(temp);return;}
+        int num = digit[start]-'0';
+        if(num<=9&&num>=2)
+        {
+            for(int i=0; i<map[num-2].size(); i++)
+            {
+                temp.push_back(map[num-2][i]);
+                recur(start+1, len, map, digit, res, temp);
+                temp.pop_back();
+            }
+        }else
+        {
+            recur(start+1,len,map,digit,res,temp);   
+        }
+    }
+};
