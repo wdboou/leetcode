@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int i=0;
+        int j=s.size();
+        int max_len = 0;
+        while(i<j)
+        {
+            vector<bool> check(26,false);
+            vector<int> pos(26,-1);
+            int cur_max=0;
+            for(int k=i; k<j; k++)
+            {
+                int temp = s[k]-'a';
+                if(!check[temp])
+                {
+                    i++;
+                    cur_max++;
+                    check[temp]=true;
+                    pos[temp]=k;
+                }else
+                {
+                    i=pos[temp]+1;
+                    break;
+                }
+            }
+            if(cur_max>max_len) max_len=cur_max;
+        }
+        return max_len;
+    }
+};
