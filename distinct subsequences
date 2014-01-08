@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int numDistinct(string S, string T) {
+        int res = 0;
+        vector<int> check(T.size()+1, 0);
+        check[0] = 1;
+        for(int i=0; i<S.size();i++)
+        {
+            for(int j=T.size(); j>=1; j--)
+            {
+                if(S[i]==T[j-1])
+                {
+                    check[j]+=check[j-1];
+                }
+            }
+        }
+        return check[T.size()];
+    }
+};
