@@ -1,0 +1,44 @@
+class Solution {
+public:
+    int largestRectangleArea(vector<int> &height) {
+        // regular solution
+        int length = height.size();
+        int *data=height.data();
+        int *right = (int*) malloc(sizeof(int)*length);
+        int *left = (int*) malloc(sizeof(int)*length);
+        for(int i=0; i<length; i++)
+            calleft(data,i,i-1,left);
+        for(int j=length-1; j>=0; j--)
+            calright(data,length,j, j+1,right);
+        int m=0;
+        for(int i=0; i<length; i++)
+        {
+            m = max(m, data[i]*(right[i]-left[i]-1));
+        }
+        free(left);
+        free(right);
+        return m;
+    }
+    void calleft(int *data, int i, int j, int *left)
+    {
+        if(i==0||j==-1)
+            {left[i] = -1;return;}
+        if(data[i]==data[j]) left[i] = left[j];
+        else if(data[i]>data[j]) left[i] = j;
+        else
+        {
+            calleft(data,i,left[j],left);
+        }
+    }
+    void calright(int *data, int length, int i, int j, int *right)
+    {
+        if(i==length-1||j==length)
+            {right[i] = length;return;}
+        if(data[i]==data[j]) right[i]=right[j];
+        else if(data[i]>data[j]) right[i]=j;
+        else
+        {
+            calright(data,length,i,right[j],right);
+        }
+    }
+};
