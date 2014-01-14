@@ -29,6 +29,7 @@ public:
         q.push(start);
         int first = 1;
         int second = 0;
+        visit.insert(start);
         while(!q.empty())
         {
             string s = q.front();
@@ -50,7 +51,7 @@ public:
                     }
                 }
             }
-            if(fist==0)
+            if(first==0)
             {
                 first = second;
                 ret++;
