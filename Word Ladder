@@ -1,0 +1,62 @@
+/*
+Given two words (start and end), and a dictionary, find the length of shortest transformation sequence from start to end, such that:
+
+Only one letter can be changed at a time
+Each intermediate word must exist in the dictionary
+For example,
+
+Given:
+start = "hit"
+end = "cog"
+dict = ["hot","dot","dog","lot","log"]
+As one shortest transformation is "hit" -> "hot" -> "dot" -> "dog" -> "cog",
+return its length 5.
+
+Note:
+Return 0 if there is no such transformation sequence.
+All words have the same length.
+All words contain only lowercase alphabetic characters.
+Discuss
+*/
+
+class Solution {
+public:
+    int ladderLength(string start, string end, unordered_set<string> &dict) {
+        int ret = 0;
+        if(start==end) return ret;
+        unordered_set<string> visit;
+        queue<string> q;
+        q.push(start);
+        int first = 1;
+        int second = 0;
+        while(!q.empty())
+        {
+            string s = q.front();
+            q.pop();
+            first--;
+            
+            for(int i=0; i<s.size(); i++)
+            {
+                for(int j=0; j<26; j++)
+                {
+                    string t = s;
+                    t[i] = 'a'+j;
+                    if(t==end) return ret+2;
+                    if(dict.find(t)!=dict.end()&&visit.find(t)==visit.end())
+                    {
+                        visit.insert(t);
+                        queue.push(t);
+                        second++;
+                    }
+                }
+            }
+            if(fist==0)
+            {
+                first = second;
+                ret++;
+                second=0;
+            }
+        }
+        return 0;
+    }
+};
