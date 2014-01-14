@@ -1,0 +1,43 @@
+/*
+Given a binary tree, find the maximum path sum.
+
+The path may start and end at any node in the tree.
+
+For example:
+Given the below binary tree,
+
+       1
+      / \
+     2   3
+Return 6.
+*/
+
+
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int maxPathSum(TreeNode *root) {
+        int _max = INT_MIN;
+        int temp = dfs(root,_max);
+        return _max;
+    }
+    int dfs(TreeNode* rt, int &_max)
+    {
+        if(!rt) return 0;
+        int r=dfs(rt->right, _max);
+        int l=dfs(rt->left, _max);
+        int m = rt->val;
+        if(l>0) m+=l;
+        if(r>0) m+=r;
+        if(m>_max) _max = m;
+        return max(l,r)>0?max(l,r)+rt->val:rt->val;
+    }
+};
